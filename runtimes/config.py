@@ -12,6 +12,7 @@ from mozlog.structured.commandline import (
     fmt_options,
     setup_logging,
 )
+from mozlog.structured.structuredlog import get_default_logger
 
 manager = None
 config = None
@@ -37,6 +38,10 @@ def get_logging_namespace():
 
 
 def get_logger():
+    logger = get_default_logger('test-runtimes')
+    if logger:
+        return logger
+
     log = {'log_{}'.format(k.replace('-', '_')): v for k, v in dict(
         config.log).iteritems()}
     return setup_logging('test-runtimes', log)
