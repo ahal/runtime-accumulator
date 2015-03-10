@@ -4,6 +4,7 @@
 
 from collections import defaultdict
 import json
+import operator
 import os
 import sys
 
@@ -33,7 +34,7 @@ class SumCount(object):
         return self
 
 
-def generate_runtimes(platform, suite, points=5, threshold=0):
+def generate_runtimes(platform, suite, points=5, threshold=0, percentile=0):
     logger.info("Generating runtimes for {} on {}".format(suite, platform))
     suites = Suite.objects(name=suite,
                            platform=platform).order_by('-timestamp')[:points]
@@ -45,8 +46,15 @@ def generate_runtimes(platform, suite, points=5, threshold=0):
             tally[k] += v
     map(sum_values, [s.runtimes for s in suites])
 
-    return {k.replace(config.dot_escape, '.'): v.total/v.count for k, v in
-            tally.iteritems() if v.total/v.count >= threshold}
+    runtimes = {k.replace(config.dot_escape, '.'): v.total/v.count for k, v in
+                tally.iteritems() if v.total/v.count >= threshold}
+
+    if percentile:
+        runtimes = sorted(runtimes.items(), key=operator.itemgetter(1))
+        index = int(round((float(percentile)/100) * len(runtimes)))
+        runtimes = dict(runtimes[index:])
+
+    return runtimes
 
 
 def run():
@@ -58,6 +66,10 @@ def run():
                    default=0,
                    doc="Exclude tests below the specified runtime threshold "
                        "(in ms)")
+    gen.add_option(name='percentile',
+                   default=0,
+                   doc="Exclude tests outside the given percentile of "
+                       "slowest tests")
     gen.add_option(name='outdir',
                    default=os.path.join(os.getcwd(), 'runtime_output'),
                    doc="Directory to store test runtime files")
@@ -75,8 +87,8 @@ def run():
     gen = config.gen
     for platform, suites in PLATFORMS.iteritems():
         for suite in suites:
-            runtimes = generate_runtimes(
-                platform, suite, points=gen.points, threshold=gen.threshold)
+            runtimes = generate_runtimes(platform, suite, points=gen.points,
+                threshold=gen.threshold, percentile=gen.percentile)
             filename = '{}.runtimes.json'.format(suite)
             pdir = os.path.join(gen.outdir, platform)
             if not os.path.isdir(pdir):
