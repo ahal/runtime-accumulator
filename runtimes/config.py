@@ -98,7 +98,7 @@ SUITES = {
     'mochitest-browser-chrome': {
         'names':  ["mochitest-browser-chrome", "mochitest-bc"],
     },
-    'mochitest-browser-chrome-e10s': {
+    'mochitest-e10s-browser-chrome': {
         'names': ["mochitest-browser-chrome-e10s",
                   "mochitest-e10s-browser-chrome",
                   "mochitest-bc-e10s"],
@@ -109,123 +109,122 @@ SUITES = {
     'mochitest-e10s-devtools-chrome': {
         'names': ['mochitest-e10s-devtools-chrome'],
     },
-    'mochitest-gl': {
-        'names': ['mochitest-gl'],
-    },
-    'mochitest-plain-e10s': {
-        'names': ['mochitest-e10s'],
-    },
-    'mochitest-plain': {
-        'names': ['mochitest', 'mochitest-debug'],
-    },
+    #'mochitest-gl': {
+    #    'names': ['mochitest-gl'],
+    #},
+    #'mochitest-e10s-plain': {
+    #    'names': ['mochitest-e10s'],
+    #},
+    #'mochitest-plain': {
+    #    'names': ['mochitest', 'mochitest-debug'],
+    #},
 }
 
 # a mapping from plaform type to enabled suites.
 PLATFORMS = {
     'linux-opt': [
         'mochitest-browser-chrome',
-        'mochitest-browser-chrome-e10s',
+        'mochitest-e10s-browser-chrome',
         'mochitest-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain-e10s',
-        'mochitest-plain',
+        'mochitest-e10s-devtools-chrome',
+        #'mochitest-gl',
+        #'mochitest-plain-e10s',
+        #'mochitest-plain',
     ],
     'linux-debug': [
         'mochitest-browser-chrome',
         'mochitest-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain-e10s',
-        'mochitest-plain',
+        #'mochitest-gl',
+        #'mochitest-plain-e10s',
+        #'mochitest-plain',
     ],
     'linux64-opt': [
         'mochitest-browser-chrome',
-        'mochitest-browser-chrome-e10s',
+        'mochitest-e10s-browser-chrome',
         'mochitest-devtools-chrome',
         'mochitest-e10s-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain-e10s',
-        'mochitest-plain',
+        #'mochitest-gl',
+        #'mochitest-plain-e10s',
+        #'mochitest-plain',
     ],
-    'linux64_gecko-debug': [
-        'mochitest-browser-chrome',
-        'mochitest-browser-chrome-e10s',
-        'mochitest-plain-e10s',
-        'mochitest-plain',
-    ],
+    #'linux64_gecko-debug': [
+    #    'mochitest-plain',
+    #    'mochitest-e10s-plain',
+    #],
     'linux64-debug': [
         'mochitest-browser-chrome',
         'mochitest-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain-e10s',
-        'mochitest-plain',
+        #'mochitest-gl',
+        #'mochitest-plain-e10s',
+        #'mochitest-plain',
     ],
     'macosx64-opt': [
         'mochitest-browser-chrome',
-        'mochitest-browser-chrome-e10s',
+        'mochitest-e10s-browser-chrome',
         'mochitest-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain',
+        #'mochitest-gl',
+        #'mochitest-plain',
     ],
     'macosx64-debug': [
         'mochitest-browser-chrome',
         'mochitest-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain',
+        #'mochitest-gl',
+        #'mochitest-plain',
     ],
-    'macosx64_gecko-opt': [
-        'mochitest-browser-chrome',
-        'mochitest-plain',
-    ],
+    #'macosx64_gecko-opt': [
+    #    'mochitest-browser-chrome',
+    #    'mochitest-plain',
+    #],
     'win32-opt': [
         'mochitest-browser-chrome',
-        'mochitest-browser-chrome-e10s',
+        'mochitest-e10s-browser-chrome',
         'mochitest-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain',
+        #'mochitest-gl',
+        #'mochitest-plain',
     ],
     'win32-debug': [
         'mochitest-browser-chrome',
         'mochitest-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain',
+        #'mochitest-gl',
+        #'mochitest-plain',
     ],
     'win64-opt': [
         'mochitest-browser-chrome',
-        'mochitest-browser-chrome-e10s',
-        'mochitest-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain',
+        'mochitest-e10s-browser-chrome',
+        #'mochitest-devtools-chrome',
+        #'mochitest-gl',
+        #'mochitest-plain',
     ],
     'win64-debug': [
         'mochitest-browser-chrome',
         'mochitest-devtools-chrome',
-        'mochitest-gl',
-        'mochitest-plain',
+        #'mochitest-gl',
+        #'mochitest-plain',
     ],
-    'android-api-9-opt': [
-        'mochitest-plain',
-        'mochitest-gl',
-    ],
-    'android-api-11-opt': [
-        'mochitest-plain',
-        'mochitest-gl',
-    ],
-    'android-api-11-debug': [
-        'mochitest-plain',
-    ],
-    'linux32_gecko-opt': [
-        'mochitest-plain',
-    ],
-    'linux64_gecko-opt': [
-        'mochitest-plain',
-    ],
-    'emulator-opt': [
-        'mochitest-plain',
-    ],
-    'emulator-debug': [
-        'mochitest-plain',
-    ],
-    'mulet-opt': [
-        'mochitest-plain',
-    ],
+    #'android-api-9-opt': [
+    #    'mochitest-plain',
+    #    'mochitest-gl',
+    #],
+    #'android-api-11-opt': [
+    #    'mochitest-plain',
+    #    'mochitest-gl',
+    #],
+    #'android-api-11-debug': [
+    #    'mochitest-plain',
+    #],
+    #'linux32_gecko-opt': [
+    #    'mochitest-plain',
+    #],
+    #'linux64_gecko-opt': [
+    #    'mochitest-plain',
+    #],
+    #'emulator-opt': [
+    #    'mochitest-plain',
+    #],
+    #'emulator-debug': [
+    #    'mochitest-plain',
+    #],
+    #'mulet-opt': [
+    #    'mochitest-plain',
+    #],
 }
